@@ -9,7 +9,7 @@ const opportunities = [
     specialization: "تقنية معلومات",
     availableSlots: 5,
     location: "الرياض",
-    image: "https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg",
+    // image: "https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg",
   },
   {
     id: 2,
@@ -17,7 +17,7 @@ const opportunities = [
     specialization: "هندسة ميكانيكية",
     availableSlots: 3,
     location: "الظهران",
-    image: "https://images.pexels.com/photos/2566581/pexels-photo-2566581.jpeg",
+    // image: "https://images.pexels.com/photos/2566581/pexels-photo-2566581.jpeg",
   },
   {
     id: 3,
@@ -25,7 +25,7 @@ const opportunities = [
     specialization: "صيدلة",
     availableSlots: 4,
     location: "الرياض",
-    image: "https://images.pexels.com/photos/1170979/pexels-photo-1170979.jpeg",
+    // image: "https://images.pexels.com/photos/1170979/pexels-photo-1170979.jpeg",
   },
 ];
 
@@ -50,7 +50,7 @@ function StudentDashboard() {
         <div className="opportunities-grid">
           {opportunities.map((op) => (
             <div className="opportunity-card" key={op.id}>
-              <img src={op.image} alt="فرصة" />
+              {/* <img src={op.image} alt="فرصة" /> */}
               <h3>{op.title}</h3>
               <p>
                 <strong>التخصص:</strong> {op.specialization}
