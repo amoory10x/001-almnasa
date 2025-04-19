@@ -1,24 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Sidebar from "./Sidebar";
 import "./index.css";
+import { OpportunitiesContext } from "./OpportunitiesContext";
 
 function OrgDashboard() {
-  const [opportunities, setOpportunities] = useState([
-    {
-      id: 1,
-      title: "تدريب في الموارد البشرية",
-      specialization: "إدارة أعمال",
-      availableSlots: 3,
-      location: "جدة",
-    },
-    {
-      id: 2,
-      title: "تدريب في تقنية المعلومات",
-      specialization: "تقنية معلومات",
-      availableSlots: 5,
-      location: "الرياض",
-    },
-  ]);
+  const { opportunities, setOpportunities } = useContext(OpportunitiesContext);
+  // const [opportunities, setOpportunities] = useState([
+  //   {
+  //     id: 1,
+  //     title: "تدريب في الموارد البشرية",
+  //     specialization: "إدارة أعمال",
+  //     availableSlots: 3,
+  //     location: "جدة",
+  //   },
+  //   {
+  //     id: 2,
+  //     title: "تدريب في تقنية المعلومات",
+  //     specialization: "تقنية معلومات",
+  //     availableSlots: 5,
+  //     location: "الرياض",
+  //   },
+  // ]);
 
   const [editingId, setEditingId] = useState(null);
   const [newForm, setNewForm] = useState(false);
