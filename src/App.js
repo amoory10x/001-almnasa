@@ -16,7 +16,7 @@ function App() {
         <Route path="/student" component={StudentDashboard} />
         <Route path="/organization" component={OrgDashboard} />
         <Route path="/admin" component={AdminDashboard} />
-        <Route path="/" exact component={LoginPage} />
+        <Route path="/" exact component={StudentDashboard} />
       </Switch>
     </Router>
   );
