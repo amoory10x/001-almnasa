@@ -1,35 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Sidebar from "./Sidebar";
-import "./index";
-
-const opportunities = [
-  {
-    id: 1,
-    title: "تدريب في STC",
-    specialization: "تقنية معلومات",
-    availableSlots: 5,
-    location: "الرياض",
-    // image: "https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg",
-  },
-  {
-    id: 2,
-    title: "تدريب في أرامكو",
-    specialization: "هندسة ميكانيكية",
-    availableSlots: 3,
-    location: "الظهران",
-    // image: "https://images.pexels.com/photos/2566581/pexels-photo-2566581.jpeg",
-  },
-  {
-    id: 3,
-    title: "تدريب في هيئة الغذاء والدواء",
-    specialization: "صيدلة",
-    availableSlots: 4,
-    location: "الرياض",
-    // image: "https://images.pexels.com/photos/1170979/pexels-photo-1170979.jpeg",
-  },
-];
+import "./index.css";
+import { OpportunitiesContext } from "./OpportunitiesContext";
 
 function StudentDashboard() {
+  const { opportunities } = useContext(OpportunitiesContext);
   const [activeFormId, setActiveFormId] = useState(null);
 
   const handleToggleForm = (id) => {
