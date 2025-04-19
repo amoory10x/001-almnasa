@@ -5,20 +5,23 @@ import Header from "./Header";
 import StudentDashboard from "./StudentDashboard";
 import OrgDashboard from "./OrgDashboard";
 import AdminDashboard from "./AdminDashboard";
+import { OpportunitiesProvider } from "./OpportunitiesContext";
 import "./index.css";
 
 function App() {
   return (
-    <Router>
-      <Header />
-      <Switch>
-        <Route path="/login" component={LoginPage} />
-        <Route path="/student" component={StudentDashboard} />
-        <Route path="/organization" component={OrgDashboard} />
-        <Route path="/admin" component={AdminDashboard} />
-        <Route path="/" exact component={StudentDashboard} />
-      </Switch>
-    </Router>
+    <OpportunitiesProvider>
+      <Router>
+        <Header />
+        <Switch>
+          <Route path="/login" component={LoginPage} />
+          <Route path="/student" component={StudentDashboard} />
+          <Route path="/organization" component={OrgDashboard} />
+          <Route path="/admin" component={AdminDashboard} />
+          <Route path="/" exact component={StudentDashboard} />
+        </Switch>
+      </Router>
+    </OpportunitiesProvider>
   );
 }
 
