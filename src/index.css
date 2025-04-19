@@ -241,6 +241,8 @@ p {
 }
 
 .submit-btn {
+  width: 100%;
+  font-size: 18px;
   flex: 1;
   background-color: #10b981;
   color: white;
@@ -258,6 +260,87 @@ p {
   padding: 8px;
   border-radius: 6px;
   cursor: pointer;
+}
+
+/* تعديل ارتفاع البطاقات */
+.opportunity-card,
+.add-card {
+  min-height: 156px;
+}
+
+/* بطاقة إضافة فرصة */
+.add-card {
+  background-color: rgba(229, 231, 235, 0.5);
+  border: 2px dashed #9ca3af;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  position: relative;
+}
+
+.add-card:hover {
+  background-color: rgba(229, 231, 235, 0.7);
+}
+
+.add-icon {
+  font-size: 48px;
+  color: #6b7280;
+  margin-bottom: 10px;
+}
+
+.add-form {
+  margin-top: 15px;
+  padding-top: 10px;
+  border-top: 1px solid #d1d5db;
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+.add-form input,
+.add-form textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+.card-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.edit-btn {
+  flex: 1;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  padding: 8px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.delete-btn {
+  flex: 0 0 40px; /* زر صغير الحجم */
+  background-color: #ef4444;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+}
+
+.delete-btn:hover {
+  background-color: #dc2626;
 }
 
 @keyframes fadeIn {
