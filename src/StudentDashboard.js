@@ -1,11 +1,21 @@
-import React, { useState, useContext } from "react";
-import Sidebar from "./Sidebar";
+import React, { useState, useEffect } from "react";
+import Sidebar from "./components/Sidebar";
 import "./index.css";
-import { OpportunitiesContext } from "./OpportunitiesContext";
 
 function StudentDashboard() {
-  const { opportunities } = useContext(OpportunitiesContext);
+  const [opportunities, setOpportunities] = useState([]);
   const [activeFormId, setActiveFormId] = useState(null);
+  const [selectedSection, setSelectedSection] = useState("opportunities");
+
+  useEffect(() => {
+    fetch("http://localhost/almnasa-backend/get_all_opportunities.php")
+      .then((res) => res.json())
+      .then((data) => {
+        if (Array.isArray(data)) setOpportunities(data);
+        else console.error("بيانات غير صالحة:", data);
+      })
+      .catch((err) => console.error("خطأ في جلب الفرص:", err));
+  }, []);
 
   const handleToggleForm = (id) => {
     setActiveFormId(activeFormId === id ? null : id);
@@ -13,36 +23,51 @@ function StudentDashboard() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("✅ تم إرسال الطلب بنجاح!");
+    alert("✅ تم إرسال طلب التقديم بنجاح!");
     setActiveFormId(null);
   };
 
   return (
     <div className="dashboard">
-      <Sidebar userType="student" />
+      <Sidebar userType="student" onSelect={setSelectedSection} />
       <div className="content">
         <h2>الفرص التدريبية المتاحة</h2>
         <div className="opportunities-grid">
           {opportunities.map((op) => (
             <div className="opportunity-card" key={op.id}>
-              {/* <img src={op.image} alt="فرصة" /> */}
               <h3>{op.title}</h3>
               <p>
-                <strong>التخصص:</strong> {op.specialization}
+                <strong>الجهة:</strong> {op.organization_name}
               </p>
               <p>
-                <strong>الموقع:</strong> {op.location}
+                <strong>عدد المقاعد:</strong> {op.available_seats}
               </p>
               <p>
-                <strong>المقاعد المتاحة:</strong> {op.availableSlots}
+                <strong>الوصف:</strong> {op.description}
+              </p>
+              <p>
+                <strong>الحالة:</strong>
+                <span
+                  style={{
+                    color: op.status === "مفتوحة" ? "#16a34a" : "#dc2626",
+                    fontWeight: "bold",
+                  }}
+                >
+                  {op.status}
+                </span>
               </p>
 
               {activeFormId === op.id ? (
                 <form className="apply-form" onSubmit={handleSubmit}>
-                  <input type="text" placeholder="الاسم الكامل" />
-                  <input type="email" placeholder="البريد الإلكتروني" />
-                  <input type="tel" placeholder="رقم الجوال" />
-                  <input type="text" placeholder="التخصص" />
+                  <input type="text" placeholder="الاسم الكامل" required />
+                  <input
+                    type="email"
+                    placeholder="البريد الإلكتروني"
+                    required
+                  />
+                  <input type="tel" placeholder="رقم الجوال" required />
+                  <input type="text" placeholder="تخصصك الدراسي" required />
+                  <input type="file" accept=".pdf,.doc,.docx" />
                   <textarea placeholder="رسالة أو ملاحظات" rows="3"></textarea>
                   <div className="form-buttons">
                     <button type="submit" className="submit-btn">

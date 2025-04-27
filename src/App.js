@@ -18,7 +18,7 @@ function App() {
           <Route path="/student" component={StudentDashboard} />
           <Route path="/organization" component={OrgDashboard} />
           <Route path="/admin" component={AdminDashboard} />
-          <Route path="/" exact component={StudentDashboard} />
+          <Route path="/" exact component={LoginPage} />
         </Switch>
       </Router>
     </OpportunitiesProvider>

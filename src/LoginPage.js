@@ -1,20 +1,40 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import "./index.css";
 
 function LoginPage() {
-  const [username, setUsername] = useState("");
+  const [userId, setUserId] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();
 
-  const handleLogin = () => {
-    if (username === "111" && password === "111") {
-      history.push("/student");
-    } else if (username === "222" && password === "222") {
-      history.push("/organization");
-    } else if (username === "333" && password === "333") {
-      history.push("/admin");
-    } else {
-      alert("البيانات غير صحيحة");
+  const handleLogin = async () => {
+    try {
+      const res = await fetch("http://localhost/almnasa-backend/login.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: userId, password }),
+      });
+
+      const data = await res.json();
+
+      if (data.type === "student") {
+        localStorage.setItem("user_id", userId);
+        localStorage.setItem("user_type", "student");
+        history.push("/student");
+      } else if (data.type === "org") {
+        localStorage.setItem("org_id", userId);
+        localStorage.setItem("user_type", "org");
+        history.push("/organization");
+      } else if (data.type === "admin") {
+        localStorage.setItem("admin_id", userId);
+        localStorage.setItem("user_type", "admin");
+        history.push("/admin");
+      } else {
+        alert(data.message || "❌ بيانات الدخول غير صحيحة");
+      }
+    } catch (err) {
+      alert("❌ حدث خطأ في الاتصال بالسيرفر");
+      console.error(err);
     }
   };
 
@@ -23,9 +43,9 @@ function LoginPage() {
       <h1>تسجيل الدخول</h1>
       <input
         type="text"
-        placeholder="اسم المستخدم"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
+        placeholder="الرقم التدريبي او اسم المستخدم"
+        value={userId}
+        onChange={(e) => setUserId(e.target.value)}
       />
       <input
         type="password"
